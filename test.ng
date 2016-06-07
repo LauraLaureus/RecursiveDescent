@@ -7,7 +7,10 @@ func inicio{}
 func REAL noDevuelveNada(REAL a){
     si (a > 2){
         mientras( a > 0){
-            escribe a;
+            REAL a;
+            VECTOR b ;
+            REAL a = 1 + 2;
+            escribe a ;
             llama  general();
             parar;
         }

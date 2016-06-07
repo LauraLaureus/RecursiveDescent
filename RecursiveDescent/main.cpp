@@ -37,6 +37,10 @@ void imprimible();
 void salidaPantalla();
 void llamadaFuncion();
 
+void asignaReal();
+void creacionReal();
+void auxExpresion();
+
 void error(std::string s){
     printf(s.c_str());
     exit(1);
@@ -369,7 +373,7 @@ void linea(){
         case VARIABLE:
         case CALL:
         case ESCRIBIR:
-         case PARAR:
+        case PARAR:
             content();
             break;
         case SI:
@@ -397,7 +401,23 @@ void content(){
         case CALL:
             llamadaFuncion();
             break;
-            
+        case REAL:
+            nextToken = tc->nextToken();
+            if (nextToken.token == VARIABLE) {
+                nextToken = tc->nextToken();
+                asignaReal();
+            }
+            else
+                error("Exected identifier");
+            break;
+        case VECTOR:
+            nextToken = tc->nextToken();
+            if (nextToken.token == VARIABLE) {
+                nextToken = tc->nextToken();
+            }
+            else
+                error("Exected identifier");
+            break;
         default:
             error("Unknown content");
             break;
@@ -567,4 +587,32 @@ void llamadaFuncion(){
     else{
         error("unknown how to call the function");
     }
+}
+
+
+
+void asignaReal(){
+    if(nextToken.token == ASIGNACION ){
+        nextToken = tc->nextToken();
+        creacionReal();
+    }
+    else if (nextToken.token == PUNTOYCOMA) {
+        return;
+    }
+    else{
+        error("unknown how to call the function");
+    }
+}
+void creacionReal(){
+    if(nextToken.token == VALORREAL || nextToken.token == VARIABLE ){
+        termino();
+        auxExpresion();
+    }
+    else{
+        error("unknown what to print");
+    }
+}
+void auxExpresion(){
+    operacion();
+    termino();
 }
