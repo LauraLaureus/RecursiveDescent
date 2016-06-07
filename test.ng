@@ -3,3 +3,7 @@ global REAL externa;
 global VECTOR externa2;
 
 func inicio{}
+
+func REAL prueba{}
+
+func noDevuelveNada{}

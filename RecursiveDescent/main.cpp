@@ -151,10 +151,10 @@ void definicionFuncion(){
                 funcionInicio();
                 break;
             case VARIABLE:
-                //funcionVoid();
+                funcionVoid();
                 break;
             case REAL:
-                //funcionDevuelve();
+                funcionDevuelve();
                 break;
             
             default:
@@ -190,7 +190,61 @@ void funcionInicio(){
     }
 }
 
+void defineParametros();
+
 void funcionVoid(){
+    switch (nextToken.token) {
+        case VARIABLE:
+            nextToken = tc->nextToken();
+            defineParametros();
+            if(nextToken.token == ABRELLAVES){
+                nextToken = tc->nextToken();
+                //bloque();
+                if(nextToken.token == CIERRALLAVES){
+                    nextToken = tc->nextToken();
+                }
+            }
+            else{
+                error("Corrupted function definition.");
+            }
+            
+            break;
+            
+        default:
+            error("Unknow error");
+            break;
+    }
 
 }
-void funcionDevuelve();
+
+void funcionDevuelve(){
+    switch (nextToken.token) {
+        case REAL:
+            nextToken = tc->nextToken();
+            identificador();
+            defineParametros();
+            if(nextToken.token == ABRELLAVES){
+                nextToken = tc->nextToken();
+                //bloque();
+                if(nextToken.token == CIERRALLAVES){
+                    nextToken = tc->nextToken();
+                }
+            }
+            else{
+                error("Corrupted function definition.");
+            }
+            
+            break;
+            
+        default:
+            error("Unknow error");
+            break;
+    }
+
+}
+
+void defineParametros(){
+
+
+
+}
