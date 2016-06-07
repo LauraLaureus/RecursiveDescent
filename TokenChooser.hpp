@@ -83,7 +83,13 @@ public:
             char c = (*s).nextChar();
             accept(c);
         }
-        return output[0];
+        if(output.size() == 0){
+            Symbol s;
+            s.token = EOF;
+            return s;
+        }else{
+            return output[0];
+        }
     };
     
 private:
