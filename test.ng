@@ -4,6 +4,13 @@ global VECTOR externa2;
 
 func inicio{}
 
-func REAL prueba{}
-
-func noDevuelveNada{}
+func REAL noDevuelveNada(REAL a){
+    si (a > 2){
+        mientras( a > 0){
+            escribe a;
+            llama  general();
+            parar;
+        }
+    }
+    devuelve a ;
+}
