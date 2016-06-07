@@ -54,6 +54,7 @@ void espacios(){
             break;
             
         case FUNC:
+            
             definicionFuncion();
             break;
             
@@ -137,6 +138,59 @@ void identificador(){
     
 }
 
+
+void funcionInicio();
+void funcionVoid();
+void funcionDevuelve();
+
 void definicionFuncion(){
+    if(nextToken.token == FUNC){
+        nextToken = tc->nextToken();
+        switch (nextToken.token) {
+            case INICIO:
+                funcionInicio();
+                break;
+            case VARIABLE:
+                //funcionVoid();
+                break;
+            case REAL:
+                //funcionDevuelve();
+                break;
+            
+            default:
+               break;
+        }
+    }
+}
+
+void bloque();
+
+void funcionInicio(){
+
+    switch (nextToken.token) {
+        case INICIO:
+            nextToken = tc->nextToken();
+
+            if(nextToken.token == ABRELLAVES){
+                nextToken = tc->nextToken();
+                //bloque();
+                if(nextToken.token == CIERRALLAVES){
+                    nextToken = tc->nextToken();
+                }
+            }
+            else{
+                error("Corrupted function definition.");
+            }
+            
+            break;
+            
+        default:
+            error("Unknow error");
+            break;
+    }
+}
+
+void funcionVoid(){
 
 }
+void funcionDevuelve();

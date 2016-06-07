@@ -1,3 +1,5 @@
 
 global REAL externa;
 global VECTOR externa2;
+
+func inicio{}
