@@ -1,2 +1,3 @@
 
 global REAL externa;
+global VECTOR externa2;

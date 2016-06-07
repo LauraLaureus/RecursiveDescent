@@ -61,7 +61,7 @@ void espacios(){
             error("Space not defined properly. Expected function or global");
             break;
     }
-    nextToken = tc->nextToken();
+    
 }
 
 
@@ -86,7 +86,7 @@ void definicion(){
             defineReal();
             break;
         case VECTOR:
-            //identificador();
+            defineVector();
             break;
         default:
             error("Expecting a data type ;.");
