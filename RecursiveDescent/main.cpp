@@ -41,6 +41,9 @@ void asignaReal();
 void creacionReal();
 void auxExpresion();
 
+void asignacion();
+void modificacion();
+
 void error(std::string s){
     printf(s.c_str());
     exit(1);
@@ -411,12 +414,16 @@ void content(){
                 error("Exected identifier");
             break;
         case VECTOR:
-            nextToken = tc->nextToken();
+            nextToken = tc->nextToken(); //solo se pueden declarar.
             if (nextToken.token == VARIABLE) {
                 nextToken = tc->nextToken();
             }
             else
                 error("Exected identifier");
+            break;
+        case VARIABLE:
+            asignacion();
+            modificacion();
             break;
         default:
             error("Unknown content");
@@ -615,4 +622,36 @@ void creacionReal(){
 void auxExpresion(){
     operacion();
     termino();
+}
+
+void asignacion(){
+    if(nextToken.token == VARIABLE ){
+        nextToken = tc->nextToken();
+        if(nextToken.token == ASIGNACION ){
+            nextToken = tc->nextToken();
+        }
+        else
+            error("Expected = for asignation");
+    }
+    else{
+        error("unknown what to print");
+    }
+}
+
+void modificacion(){
+    switch (nextToken.token) {
+        case VALORREAL:
+        case VARIABLE:
+            termino();
+            auxExpresion();
+            break;
+        case LEER:
+           nextToken = tc->nextToken();
+            break;
+        case CALL:
+            llamadaFuncion();
+            break;
+        default:
+            break;
+    }
 }
